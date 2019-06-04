@@ -1,3 +1,7 @@
+This is a direct fork of [broadinstitute/keras-resnet](https://github.com/broadinstitute/keras-resnet). However, all `keras` import statements have been changed to `tensorflow.keras`, allowing it to be used more easily in a TF2.0 project.
+
+
+
 Keras-ResNet
 ============
 
