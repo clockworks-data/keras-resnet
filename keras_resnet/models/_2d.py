@@ -7,16 +7,16 @@ keras_resnet.models._2d
 This module implements popular two-dimensional residual models.
 """
 
-import keras.backend
-import keras.layers
-import keras.models
-import keras.regularizers
+import tensorflow.keras.backend
+import tensorflow.keras.layers
+import tensorflow.keras.models
+import tensorflow.keras.regularizers
 
 import keras_resnet.blocks
 import keras_resnet.layers
 
 
-class ResNet2D(keras.Model):
+class ResNet2D(tensorflow.keras.Model):
     """
     Constructs a `keras.models.Model` object using the given block count.
 
@@ -43,7 +43,7 @@ class ResNet2D(keras.Model):
 
         >>> shape, classes = (224, 224, 3), 1000
 
-        >>> x = keras.layers.Input(shape)
+        >>> x = tensorflow.keras.layers.Input(shape)
 
         >>> blocks = [2, 2, 2, 2]
 
@@ -65,7 +65,7 @@ class ResNet2D(keras.Model):
         *args,
         **kwargs
     ):
-        if keras.backend.image_data_format() == "channels_last":
+        if tensorflow.keras.backend.image_data_format() == "channels_last":
             axis = 3
         else:
             axis = 1
@@ -73,10 +73,11 @@ class ResNet2D(keras.Model):
         if numerical_names is None:
             numerical_names = [True] * len(blocks)
 
-        x = keras.layers.Conv2D(64, (7, 7), strides=(2, 2), use_bias=False, name="conv1", padding="same")(inputs)
+        x = tensorflow.keras.layers.Conv2D(64, (7, 7), strides=(2, 2), use_bias=False,
+                                 name="conv1", padding="same")(inputs)
         x = keras_resnet.layers.BatchNormalization(axis=axis, epsilon=1e-5, freeze=freeze_bn, name="bn_conv1")(x)
-        x = keras.layers.Activation("relu", name="conv1_relu")(x)
-        x = keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding="same", name="pool1")(x)
+        x = tensorflow.keras.layers.Activation("relu", name="conv1_relu")(x)
+        x = tensorflow.keras.layers.MaxPooling2D((3, 3), strides=(2, 2), padding="same", name="pool1")(x)
 
         features = 64
 
@@ -99,8 +100,8 @@ class ResNet2D(keras.Model):
         if include_top:
             assert classes > 0
 
-            x = keras.layers.GlobalAveragePooling2D(name="pool5")(x)
-            x = keras.layers.Dense(classes, activation="softmax", name="fc1000")(x)
+            x = tensorflow.keras.layers.GlobalAveragePooling2D(name="pool5")(x)
+            x = tensorflow.keras.layers.Dense(classes, activation="softmax", name="fc1000")(x)
 
             super(ResNet2D, self).__init__(inputs=inputs, outputs=x, *args, **kwargs)
         else:
@@ -130,7 +131,7 @@ class ResNet2D18(ResNet2D):
 
         >>> shape, classes = (224, 224, 3), 1000
 
-        >>> x = keras.layers.Input(shape)
+        >>> x = tensorflow.keras.layers.Input(shape)
 
         >>> model = keras_resnet.models.ResNet18(x, classes=classes)
 
@@ -174,7 +175,7 @@ class ResNet2D34(ResNet2D):
 
         >>> shape, classes = (224, 224, 3), 1000
 
-        >>> x = keras.layers.Input(shape)
+        >>> x = tensorflow.keras.layers.Input(shape)
 
         >>> model = keras_resnet.models.ResNet34(x, classes=classes)
 
@@ -218,7 +219,7 @@ class ResNet2D50(ResNet2D):
 
         >>> shape, classes = (224, 224, 3), 1000
 
-        >>> x = keras.layers.Input(shape)
+        >>> x = tensorflow.keras.layers.Input(shape)
 
         >>> model = keras_resnet.models.ResNet50(x)
 
@@ -265,7 +266,7 @@ class ResNet2D101(ResNet2D):
 
         >>> shape, classes = (224, 224, 3), 1000
 
-        >>> x = keras.layers.Input(shape)
+        >>> x = tensorflow.keras.layers.Input(shape)
 
         >>> model = keras_resnet.models.ResNet101(x, classes=classes)
 
@@ -312,7 +313,7 @@ class ResNet2D152(ResNet2D):
 
         >>> shape, classes = (224, 224, 3), 1000
 
-        >>> x = keras.layers.Input(shape)
+        >>> x = tensorflow.keras.layers.Input(shape)
 
         >>> model = keras_resnet.models.ResNet152(x, classes=classes)
 
@@ -359,7 +360,7 @@ class ResNet2D200(ResNet2D):
 
         >>> shape, classes = (224, 224, 3), 1000
 
-        >>> x = keras.layers.Input(shape)
+        >>> x = tensorflow.keras.layers.Input(shape)
 
         >>> model = keras_resnet.models.ResNet200(x, classes=classes)
 
