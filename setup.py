@@ -15,7 +15,7 @@ setuptools.setup(
     install_requires=[
     ],
     license="MIT",
-    name="keras-resnet",
+    name="keras-resnet-blicker",
     package_data={
         "keras-resnet": [
             "data/checkpoints/*/*.hdf5",
@@ -28,5 +28,5 @@ setuptools.setup(
         ]
     ),
     url="https://github.com/broadinstitute/keras-resnet",
-    version="0.2.0-blicker"
+    version="0.2.0"
 )
